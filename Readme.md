@@ -39,3 +39,26 @@ class Post extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	..
 }
 ```
+
+## View
+
+### JsonView
+
+The JSON View is actually able to replace the default template view. It comes into play, when you want to render AJAX
+calls and/or design an external accessible API for your application.
+
+This class was backported from TYPO3 Flow.
+
+Detailed Instructions on its usage can be found in the [TYPO3 Flow Documentation](http://docs.typo3.org/flow/TYPO3FlowDocumentation/TheDefinitiveGuide/PartIII/ModelViewController.html#json-view).
+
+
+#### Usage
+Use it to decide on runtime, if you need a JSON View, as Extbase doesn't offer the same comfortable View API as Flow does.
+
+One of the magic initialize* Methods should do the replacement of the view.
+
+**Restrictions:**
+None so far.
+
+**Hints:**
+By default, only the 'value' variable gets rendered.
