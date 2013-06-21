@@ -18,7 +18,7 @@ Use one or both of the following arguments:
 - maximumWords (int) A positive Integer
 
 **Restrictions:**
-minimumWords must not be smaller than maximumWords
+minimumWords must not be greater than maximumWords
 
 **Hints:**
 Please be aware that the Validator **does not** validate your existing TCA/TCEForms. I'm currently working on it.
