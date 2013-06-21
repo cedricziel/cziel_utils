@@ -39,14 +39,12 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView {
 	 * @var \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext
 	 */
 	protected $controllerContext;
-
 	/**
 	 * Only variables whose name is contained in this array will be rendered
 	 *
 	 * @var array
 	 */
 	protected $variablesToRender = array('value');
-
 	/**
 	 * The rendering configuration for this JSON view which
 	 * determines which properties of each variable to render.
@@ -98,7 +96,6 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView {
 	 * @var array
 	 */
 	protected $configuration = array();
-
 	/**
 	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager
 	 * @inject
@@ -194,8 +191,12 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView {
 				if (isset($configuration['_descendAll']) && is_array($configuration['_descendAll'])) {
 					$array[] = $this->transformValue($element, $configuration['_descendAll']);
 				} else {
-					if (isset($configuration['_only']) && is_array($configuration['_only']) && !in_array($key, $configuration['_only'])) continue;
-					if (isset($configuration['_exclude']) && is_array($configuration['_exclude']) && in_array($key, $configuration['_exclude'])) continue;
+					if (isset($configuration['_only']) && is_array($configuration['_only']) && !in_array($key, $configuration['_only'])) {
+						continue;
+					}
+					if (isset($configuration['_exclude']) && is_array($configuration['_exclude']) && in_array($key, $configuration['_exclude'])) {
+						continue;
+					}
 					$array[$key] = $this->transformValue($element, isset($configuration[$key]) ? $configuration[$key] : array());
 				}
 			}
@@ -229,8 +230,12 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView {
 		$propertyNames = ObjectAccess::getGettablePropertyNames($object);
 		$propertiesToRender = array();
 		foreach ($propertyNames as $propertyName) {
-			if (isset($configuration['_only']) && is_array($configuration['_only']) && !in_array($propertyName, $configuration['_only'])) continue;
-			if (isset($configuration['_exclude']) && is_array($configuration['_exclude']) && in_array($propertyName, $configuration['_exclude'])) continue;
+			if (isset($configuration['_only']) && is_array($configuration['_only']) && !in_array($propertyName, $configuration['_only'])) {
+				continue;
+			}
+			if (isset($configuration['_exclude']) && is_array($configuration['_exclude']) && in_array($propertyName, $configuration['_exclude'])) {
+				continue;
+			}
 
 			$propertyValue = ObjectAccess::getProperty($object, $propertyName);
 
@@ -239,6 +244,7 @@ class JsonView extends \TYPO3\CMS\Extbase\Mvc\View\AbstractView {
 			} elseif (isset($configuration['_descend']) && array_key_exists($propertyName, $configuration['_descend'])) {
 				$propertiesToRender[$propertyName] = $this->transformValue($propertyValue, $configuration['_descend'][$propertyName]);
 			} else {
+				continue;
 			}
 		}
 		if (isset($configuration['_exposeObjectIdentifier']) && $configuration['_exposeObjectIdentifier'] === TRUE) {
