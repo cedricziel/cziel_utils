@@ -40,7 +40,6 @@ class WordCountValidator extends \TYPO3\CMS\Extbase\Validation\Validator\Abstrac
 	 * to Result.
 	 *
 	 * @param mixed $value The value which should be validated
-	 * @throws \TYPO3\CMS\Extbase\Validation\Exception\InvalidSubjectException
 	 * @throws \TYPO3\CMS\Extbase\Validation\Exception\InvalidValidationOptionsException
 	 * @return boolean TRUE if the value is valid, FALSE if an error occured
 	 */
